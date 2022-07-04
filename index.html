@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- Vsetko prevzate z w3schools -->
+	<head>
+		<meta charset = "utf-8">
+		<title>Register</title>
+		<link rel = "stylesheet" href = "css/style.css">
+	</head>
+	<body>
+		<header>
+			<nav>
+				<ul class="nav_links">
+					<li><a href="https://webte1.fei.stuba.sk/~xhrcan/SilvesterMakarone2">O mne</a> </li>
+					<li><a href="https://webte1.fei.stuba.sk/~xhrcan/SilvesterMakarone2/Zivotopis">Životopis</a> </li>
+					<li><a href="https://webte1.fei.stuba.sk/~xhrcan/SilvesterMakarone2/Moj_rozvrh">Môj Rozvrh</a> </li>
+					<li><a href="https://webte1.fei.stuba.sk/~xhrcan/SilvesterMakarone2/tbbt">The Big Bang Theory</a> </li>
+				</ul>
+			</nav>
+			<button>Contact</button>
+		</header>
+		
+		<section>
+			<!--Prevzate z https://webdesign.tutsplus.com-->	
+			<div class="form">
+				<h3>Register</h3>
+				<form name="myForm" action="https://iolab.sk/form2mail/form2mail.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+					<input type="hidden" name="name" value="Hrćan Jan">
+					<input type="hidden" name="apikey" value="e60daedd04d5696741d5241940c7cc8b">
+					<input type="hidden" name="from" value="xhrcan@stuba.sk">
+					<input type="hidden" name="to" value="feistu02@gmail.com">
+					<input type="hidden" name="subject" value="Hrćan Jan Z3">
+					<input type="hidden" name="redirectOk" value="http://google.sk">
+					<input type="hidden" name="redirectFalse" value>
+					<p>
+						<label>Your Name *</label>
+						<input type="text" name="fname" placeholder="Enter your first name">
+					</p>
+					<p>
+						<label>Your Lastname *</label>
+						<input type="text" name="lname" placeholder="Enter your last name">
+					</p>
+					<p>
+						<label>Your Password *</label>
+						<input type="password" name="pass" placeholder="Enter your password">
+					</p>
+					<p>
+						<label>Email Address *</label>
+						<input type="text" name="email" placeholder="Enter your email">
+					</p>
+					<p>
+						<label>Your Birthdate *</label>
+						<input type="date" name="bdate">
+					</p>
+					<p>
+						<label>Age *</label>
+						<input type="text" name="age" placeholder="Enter your age">
+					</p>
+					<p class="full-width">
+						<label>Why would you like to register?</label>
+						<textarea name="text" id="text" cols="30" rows="3" placeholder="Enter text"></textarea>
+					</p>
+					<!--https://www.youtube.com/watch?v=okbByPWS1Xc&t=563s&ab_channel=CodingLab-->
+					<div class="gender-details">
+						<input type="radio" name="gender" id="dot-1" onclick="optionBox()">
+						<input type="radio" name="gender" id="dot-2" onclick="optionBox()">
+						<input type="radio" name="gender" id="dot-3" onclick="optionBox()">
+						<span class="gender-title">Gender</span>
+						<div class="category">
+							<label for="dot-1">
+								<span class="dot one"></span>
+								<span class="gender">Male</span>
+							</label>
+							<label for="dot-2">
+								<span class="dot two"></span>
+								<span class="gender">Female</span>
+							</label>
+							<label for="dot-3">
+								<span class="dot three"></span>
+								<span class="gender">Other</span>
+							</label>
+						</div>
+					</div>
+					<div>
+						<textarea id="boxx" rows="4"></textarea>
+					</div>
+					<div class="full-width">
+						<p>
+						<select id="districtT" name="Region" onchange="changeDistrict()">
+							<option value="-1">--Select Region--</option>
+							<option value="0">Banat</option>
+							<option value="1">Bačka</option>
+							<option value="2">Srem</option>
+						</select>
+						<select id="municipalityT" name="Municipality" onchange="changeMunicipality()">
+							<option value="-1">--Select Municipality--</option>
+							<option value="0">Novi Sad</option>
+							<option value="1">Bačka Palanka</option>
+							<option value="2">Bački Petrovac</option>
+							<option value="3">Stara Pazova</option>
+							<option value="4">Bač</option>
+							<option value="5">Šid</option>
+							<option value="6">Kovačica</option>
+							<option value="7">Alibunar</option>
+							<option value="8">Zrenjanin</option>
+						</select>
+						<select id="townT" name="Town">
+							<option value="-1">--Select Town--</option>
+							<option value="0">Novi Sad</option>
+							<option value="1">Kisač</option>
+							<option value="2">Bački Petrovac</option>
+							<option value="3">Gložan</option>
+							<option value="4">Kulpin</option>
+							<option value="5">Bačka Palanka</option>
+							<option value="6">Pivnice</option>
+							<option value="7">Silbaš</option>
+							<option value="8">Selenča</option>
+							<option value="9">Stara Pazova</option>
+							<option value="10">Šid</option>
+							<option value="11">Erdevik</option>
+							<option value="12">Kovačica</option>
+							<option value="13">Padina</option>
+							<option value="14">Janošik</option>
+							<option value="15">Zrenjanin</option>
+							<option value="16">Belo Blato</option>
+							<option value="17">Aradac</option>
+						</select>
+					</p>
+					</div>
+					<div class="full-width">
+						<label>What is your favorite animal?</label>
+						<label for="opt1">
+							<input type="checkbox" id="opt1" name="opt1" value="Dog" onclick="changeCheck()">
+							Dog
+						</label>
+						<label for="opt2">
+							<input type="checkbox" id="opt2" name="opt2" value="Cat" onclick="changeCheck()">
+							Cat</label>
+						<label for="opt3">
+							<input type="checkbox" id="opt3" name="opt3" value="otherText" onclick="changeCheck()">
+							Other
+						</label>
+						<div>
+							<br>
+							<input id="otherText" type="text" name="otherText" placeholder="Enter your favorite animals">
+						</div>
+					</div>
+					<p>
+						<button>Send</button>
+					</p>
+				</form>
+			</div>
+		</section>
+		<footer>
+			<address>
+				Stránku vytvoril: <abbr title="xhrcan@stuba.sk">Jan Hrćan</abbr>.<br> 
+				Adresa: Hviezdoslavová 25 <br>
+				Mesto: Padina <br>
+				Štát: Srbsko <br>
+			</address>
+		</footer>
+		<script src="js/script.js"></script>
+	</body>
+</html>
