@@ -1,97 +1,97 @@
 function validateForm() {
 
   let x = document.forms["myForm"]["fname"].value;
-  if (x == "") {
+  if (x === "") {
     alert("Name must be filled out");
     return false;
   }
 
   x = document.forms["myForm"]["lname"].value;
-  if (x == "") {
+  if (x === "") {
     alert("Last name must be filled out");
     return false;
   }
 
   x = document.forms["myForm"]["pass"].value;
-  if (x == "") {
+  if (x === "") {
     alert("Password must be filled out");
     return false;
   }
 
   x = document.forms["myForm"]["email"].value;
-  if (x == "") {
+  if (x === "") {
     alert("Email must be filled out");
     return false;
   }
 
-  var format = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})$/;
-  if(format.test(x)==false){
+  const format = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.][a-zA-Z]{2,}|[.][a-zA-Z]{2,}[.][a-zA-Z]{2,})$/;
+  if(format.test(x) === false){
     alert("email: wrong format");
     return false;
   }
 
   x = document.forms["myForm"]["bdate"].value;
-  if (x == "") {
+  if (x === "") {
     alert("Birthdate must be filled out");
     return false;
   }
 
-  var b= "";
-  var tmp = /^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])$/;
-  if(tmp.test(x)== false){
+  let b = "";
+  const tmp = /^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])$/;
+  if(tmp.test(x) === false){
     alert("Birthdate: invalid date");
     return false;
   }
 
   x = document.forms["myForm"]["age"].value;
-  if (x == "") {
+  if (x === "") {
     alert("Age name must be filled out");
     return false;
   }
 
   b = document.forms["myForm"]["bdate"].value;
     
-  var date = String(b); // Date
-  var year  = date.slice(0,4);
-  var month = date.slice(5,7);
-  var day = date.slice(8,10);
+  const date = String(b); // Date
+  const year  = date.slice(0,4);
+  const month = date.slice(5,7);
+  const day = date.slice(8,10);
    
-  var today = new Date(); // Today's date
-  var currentYear = today.getFullYear();
-  var currentMonth = today.getMonth() + 1;
-  var currentDay = today.getDate();
+  const today = new Date(); // Today's date
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1;
+  const currentDay = today.getDate();
 
-  var age = currentYear - year;
+  let age = currentYear - year;
 
-  if(currentMonth < month || currentMonth == month && currentDay < day){
-    --age;
+  if(currentMonth < month || currentMonth.toString() === month.toString() && currentDay < day){
+    age--;
   }
 
-  if(age != x){
+  if(age !== x){
     alert("Age and birthdate don't match");
     return false;
   }
 
   x = document.forms["myForm"]["gender"].value;
-  if (x == "") {
+  if (x === "") {
     alert("Select Gender");
     return false;
   }
 
   x = document.forms["myForm"]["Region"].value;
-  if (x == -1) {
+  if (x === -1) {
     alert("Select District");
     return false;
   }
 
   x = document.forms["myForm"]["Municipality"].value;
-  if (x == -1) {
+  if (x === -1) {
     alert("Select Municipality");
     return false;
   }
 
   x = document.forms["myForm"]["Town"].value;
-  if (x == -1) {
+  if (x === -1) {
     alert("Select Town");
     return false;
   }
@@ -100,659 +100,229 @@ function validateForm() {
 }
 
 function optionBox(){
-  var male= document.getElementById('dot-1');
-  var female = document.getElementById('dot-2');
-  var other = document.getElementById('dot-3');
+  const male = document.getElementById('dot-1');
+  const female = document.getElementById('dot-2');
+  const other = document.getElementById('dot-3');
+  const boxx = document.getElementById('boxx');
 
   male.onchange = function() {  
-    document.getElementById("boxx").style.display = 'block';
-    document.getElementById('boxx').innerHTML = 'You have chosen Male';
-    values.push(document.getElementById('boxx').value);
+    boxx.style.display = 'block';
+    boxx.innerHTML = 'You have chosen Male';
   };
 
   female.onchange = function() {  
-    document.getElementById("boxx").style.display = 'block';
-    document.getElementById('boxx').innerHTML = 'You have chosen Female';
-    values.push(document.getElementById('boxx').value);
+    boxx.style.display = 'block';
+    boxx.innerHTML = 'You have chosen Female';
   };  
 
   other.onchange = function() {  
-    document.getElementById("boxx").style.display = 'block';
-    document.getElementById('boxx').innerHTML = 'You have chosen other';
-    values.push(document.getElementById('boxx').value);
+    boxx.style.display = 'block';
+    boxx.innerHTML = 'You have chosen other';
   };
 }
 
 function changeCheck(){
-  var dog= document.getElementById('opt1');
-  var cat = document.getElementById('opt2');
-  var other = document.getElementById('opt3'); 
+  const other = document.getElementById('opt3');
 
   other.onchange = function() {  
     document.getElementById("otherText").style.display = 'block';
-    values.push(document.getElementById('otherText').value);
   };
 }
 
+let regions = document.getElementById("districtT");
+let municipalities = document.getElementById('municipalityT');
+let towns = document.getElementById('townT');
+
 function changeDistrict(){
-  if(districtT.options[districtT.selectedIndex].index == 1){
-        
-    municipalityT.options[0].text = "Kovačica";
-    municipalityT.options[0].value = "0";
+  let length1 = municipalities.options.length;
+  for (let i = length1 - 1; i >= 1; i--)
+    municipalities.options[i] = null;
 
-    municipalityT.options[1].text = "Alibunar";
-    municipalityT.options[1].value = "1";
+  deletePlease();
 
-    municipalityT.options[2].text = "Zrenjanin";
-    municipalityT.options[2].value = "2";
+  switch(regions.value){
+    case "0":
+      const opt1 = document.createElement("option");
+      opt1.value = "6";
+      opt1.textContent = "Kovačica";
+      municipalities.appendChild(opt1);
+      change("6");
 
-    municipalityT.options[3].text = "";
-    municipalityT.options[4].text = "";
-    municipalityT.options[5].text = "";
-    municipalityT.options[6].text = "";
-    municipalityT.options[7].text = "";
-    municipalityT.options[8].text = "";
-    municipalityT.options[9].text = "";
+      const opt2 = document.createElement("option");
+      opt2.value = "7";
+      opt2.textContent = "Zrenjanin";
+      municipalities.appendChild(opt2);
+      change("7");
 
-    municipalityT.options[3].value = "-1";
-    municipalityT.options[4].value = "-1";
-    municipalityT.options[5].value = "-1";
-    municipalityT.options[6].value = "-1";
-    municipalityT.options[7].value = "-1";
-    municipalityT.options[8].value = "-1";
-    municipalityT.options[9].value = "-1";
+      const opt3 = document.createElement("option");
+      opt3.value = "8";
+      opt3.textContent = "Alibunar";
+      municipalities.appendChild(opt3);
+      change("8");
+      break;
 
-    townT.options[0].text = "Kovačica";
-    townT.options[0].value = "0";
+    case "1":
+      const opt4 = document.createElement("option");
+      opt4.value = "0";
+      opt4.textContent = "Novi Sad";
+      municipalities.appendChild(opt4);
+      change("0");
 
-    townT.options[1].text = "Padina";
-    townT.options[1].value = "1";
+      const opt5 = document.createElement("option");
+      opt5.value = "1";
+      opt5.textContent = "Bačka Palanka";
+      municipalities.appendChild(opt5);
+      change("1");
 
-    townT.options[2].text = "Janošik";
-    townT.options[2].value = "2";
+      const opt6 = document.createElement("option");
+      opt6.value = "2";
+      opt6.textContent = "Bački Petrovac";
+      municipalities.appendChild(opt6);
+      change("2");
+      break;
 
-    townT.options[3].text = "Zrenjanin";
-    townT.options[3].value = "3";
+    case "2":
+      const opt7 = document.createElement("option");
+      opt7.value = "3";
+      opt7.textContent = "Stara Pazova";
+      municipalities.appendChild(opt7);
+      change("3");
 
-    townT.options[4].text = "Belo Blato";
-    townT.options[4].value = "4";
+      const opt8 = document.createElement("option");
+      opt8.value = "4";
+      opt8.textContent = "Bač";
+      municipalities.appendChild(opt8);
+      change("4");
 
-    townT.options[5].text = "Aradac";
-    townT.options[5].value = "5";
-
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-
-  }
-
-  else if (districtT.options[districtT.selectedIndex].index == 2){
-    municipalityT.options[0].text = "Novi Sad";
-    municipalityT.options[0].value = "0";
-
-    municipalityT.options[1].text = "Bačka Palanka";
-    municipalityT.options[1].value = "1";
-
-    municipalityT.options[2].text = "Bački Petrovac";
-    municipalityT.options[2].value = "2";
-
-    municipalityT.options[3].text = "Bač";
-    municipalityT.options[3].value = "3";
-
-    municipalityT.options[4].text = "";
-    municipalityT.options[5].text = "";
-    municipalityT.options[6].text = "";
-    municipalityT.options[7].text = "";
-    municipalityT.options[8].text = "";
-    municipalityT.options[9].text = "";
-
-    municipalityT.options[4].value = "-1";
-    municipalityT.options[5].value = "-1";
-    municipalityT.options[6].value = "-1";
-    municipalityT.options[7].value = "-1";
-    municipalityT.options[8].value = "-1";
-    municipalityT.options[9].value = "-1";
-
-    townT.options[0].text = "Novi Sad";
-    townT.options[0].value = "0";
-
-    townT.options[1].text = "Kisač";
-    townT.options[1].value = "1";
-
-    townT.options[2].text = "Bački Petrovac";
-    townT.options[2].value = "2";
-
-    townT.options[3].text = "Gložan";
-    townT.options[3].value = "3";
-
-    townT.options[4].text = "Kulpin";
-    townT.options[4].value = "4";
-
-    townT.options[5].text = "Bačka Palanka";
-    townT.options[5].value = "5";
-
-    townT.options[6].text = "Pivnice";
-    townT.options[6].value = "6";
-
-    townT.options[7].text = "Silbaš";
-    townT.options[7].value = "7";
-
-    townT.options[8].text = "Selenča";
-    townT.options[8].value = "8";
-
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
-
-  else if (districtT.options[districtT.selectedIndex].index == 3){
-    municipalityT.options[0].text = "Stara Pazova";
-    municipalityT.options[0].value = "0";
-
-    municipalityT.options[1].text = "Šid";
-    municipalityT.options[1].value = "1";
-
-    municipalityT.options[2].text = "";
-    municipalityT.options[3].text = "";
-    municipalityT.options[4].text = "";
-    municipalityT.options[5].text = "";
-    municipalityT.options[6].text = "";
-    municipalityT.options[7].text = "";
-    municipalityT.options[8].text = "";
-    municipalityT.options[9].text = "";
-
-    municipalityT.options[2].value = "-1";
-    municipalityT.options[3].value = "-1";
-    municipalityT.options[4].value = "-1";
-    municipalityT.options[5].value = "-1";
-    municipalityT.options[6].value = "-1";
-    municipalityT.options[7].value = "-1";
-    municipalityT.options[8].value = "-1";
-    municipalityT.options[9].value = "-1";
-
-    townT.options[0].text = "Stara Pazova";
-    townT.options[0].value = "0";
-
-    townT.options[1].text = "Šid";
-    townT.options[1].value = "1";
-
-    townT.options[2].text = "Erdevik";
-    townT.options[2].value = "2";
-
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
+      const opt9 = document.createElement("option");
+      opt9.value = "5";
+      opt9.textContent = "Šid";
+      municipalities.appendChild(opt9);
+      change("5");
+      break;
   }
 }
 
+function deletePlease(){
+  let length2 = towns.options.length;
+  for (let i = length2 - 1; i >= 1; i--)
+    towns.options[i] = null;
+}
+
 function changeMunicipality(){
-  if(districtT.options[districtT.selectedIndex].index == 1 && municipalityT.options[municipalityT.selectedIndex].index == 0){
-    townT.options[0].text = "Kovačica";
-    townT.options[0].value = "0";
+  deletePlease();
+  change(municipalities.value);
+}
 
-    townT.options[1].text = "Padina";
-    townT.options[1].value = "1";
+function change(num){
+  switch (num){
+    case "0":
+      const opt1 = document.createElement("option");
+      opt1.value = "0";
+      opt1.textContent = "Novi Sad";
+      towns.appendChild(opt1);
 
-    townT.options[2].text = "";
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
+      const opt2 = document.createElement("option");
+      opt2.value = "1";
+      opt2.textContent = "Kisač";
+      towns.appendChild(opt2);
+      break;
 
-    townT.options[2].value = "-1";
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
+    case "1":
+      const opt3 = document.createElement("option");
+      opt3.value = "5";
+      opt3.textContent = "Bačka Palanka";
+      towns.appendChild(opt3);
 
-  if(districtT.options[districtT.selectedIndex].index == 1 && municipalityT.options[municipalityT.selectedIndex].index == 1){
-    townT.options[0].text = "Janošik";
-    townT.options[0].value = "0";
+      const opt4 = document.createElement("option");
+      opt4.value = "6";
+      opt4.textContent = "Pivnice";
+      towns.appendChild(opt4);
 
-    townT.options[1].text = "";
-    townT.options[2].text = "";
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
+      const opt5 = document.createElement("option");
+      opt5.value = "7";
+      opt5.textContent = "Silbaš";
+      towns.appendChild(opt5);
+      break
 
-    townT.options[1].value = "-1";
-    townT.options[2].value = "-1";
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
+    case "2":
+      const opt6 = document.createElement("option");
+      opt6.value = "2";
+      opt6.textContent = "Bački Petrovac";
+      towns.appendChild(opt6);
 
-  if(districtT.options[districtT.selectedIndex].index == 1 && municipalityT.options[municipalityT.selectedIndex].index == 2){
-    townT.options[0].text = "Zrenjanin";
-    townT.options[0].value = "0";
+      const opt7 = document.createElement("option");
+      opt7.value = "3";
+      opt7.textContent = "Gložan";
+      towns.appendChild(opt7);
 
-    townT.options[1].text = "Belo Blato";
-    townT.options[1].value = "1";
+      const opt8 = document.createElement("option");
+      opt8.value = "4";
+      opt8.textContent = "Kulpin";
+      towns.appendChild(opt8);
+      break;
 
-    townT.options[2].text = "Aradac";
-    townT.options[2].value = "2";
+    case "3":
+      const opt9 = document.createElement("option");
+      opt9.value = "9";
+      opt9.textContent = "Stara Pazova";
+      towns.appendChild(opt9);
+      break;
 
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
+    case "4":
+      const opt10 = document.createElement("option");
+      opt10.value = "2";
+      opt10.textContent = "Selenča";
+      towns.appendChild(opt10);
+      break;
 
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
+    case "5":
+      const opt12 = document.createElement("option");
+      opt12.value = "10";
+      opt12.textContent = "Šid";
+      towns.appendChild(opt12);
 
-  if(districtT.options[districtT.selectedIndex].index == 2 && municipalityT.options[municipalityT.selectedIndex].index == 0){
-    townT.options[0].text = "Novi Sad";
-    townT.options[0].value = "0";
+      const opt11 = document.createElement("option");
+      opt11.value = "11";
+      opt11.textContent = "Erdevik";
+      towns.appendChild(opt11);
+      break;
 
-    townT.options[1].text = "Kisač";
-    townT.options[1].value = "1";
+    case "6":
+      const opt13 = document.createElement("option");
+      opt13.value = "12";
+      opt13.textContent = "Kovačica";
+      towns.appendChild(opt13);
 
-    townT.options[2].text = "";
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
+      const opt14 = document.createElement("option");
+      opt14.value = "13";
+      opt14.textContent = "Padina";
+      towns.appendChild(opt14);
+      break;
 
-    townT.options[2].value = "-1";
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
+    case "8":
+      const opt15 = document.createElement("option");
+      opt15.value = "14";
+      opt15.textContent = "Janošik";
+      towns.appendChild(opt15);
 
-  if(districtT.options[districtT.selectedIndex].index == 2 && municipalityT.options[municipalityT.selectedIndex].index == 1){
-    townT.options[0].text = "Bački Petrovac";
-    townT.options[0].value = "0";
+      break;
 
-    townT.options[1].text = "Gložan";
-    townT.options[1].value = "1";
+    case "7":
+      const opt16 = document.createElement("option");
+      opt16.value = "15";
+      opt16.textContent = "Zrenjanin";
+      towns.appendChild(opt16);
 
-    townT.options[2].text = "Kulpin";
-    townT.options[2].value = "2";
+      const opt17 = document.createElement("option");
+      opt17.value = "16";
+      opt17.textContent = "Belo Blato";
+      towns.appendChild(opt17);
 
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
-
-  if(districtT.options[districtT.selectedIndex].index == 2 && municipalityT.options[municipalityT.selectedIndex].index == 2){
-    townT.options[0].text = "Bačka Palanka";
-    townT.options[0].value = "0";
-
-    townT.options[1].text = "Pivnice";
-    townT.options[1].value = "1";
-
-    townT.options[2].text = "Silbaš";
-    townT.options[2].value = "2";
-
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
-
-  if(districtT.options[districtT.selectedIndex].index == 2 && municipalityT.options[municipalityT.selectedIndex].index == 3){
-    townT.options[0].text = "Selenča";
-    townT.options[0].value = "0";
-
-    townT.options[1].text = "";
-    townT.options[2].text = "";
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[1].value = "-1";
-    townT.options[2].value = "-1";
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
-
-  if(districtT.options[districtT.selectedIndex].index == 3 && municipalityT.options[municipalityT.selectedIndex].index == 0){
-    townT.options[0].text = "Stara Pazova";
-    townT.options[0].value = "0";
-
-    townT.options[1].text = "";
-    townT.options[2].text = "";
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[1].value = "-1";
-    townT.options[2].value = "-1";
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
-  }
-
-  if(districtT.options[districtT.selectedIndex].index == 3 && municipalityT.options[municipalityT.selectedIndex].index == 1){
-    townT.options[0].text = "Šid";
-    townT.options[0].value = "0";
-
-    townT.options[1].text = "Erdevik";
-    townT.options[1].value = "1";
-
-    townT.options[2].text = "";
-    townT.options[3].text = "";
-    townT.options[4].text = "";
-    townT.options[5].text = "";
-    townT.options[6].text = "";
-    townT.options[7].text = "";
-    townT.options[8].text = "";
-    townT.options[9].text = "";
-    townT.options[10].text = "";
-    townT.options[11].text = "";
-    townT.options[12].text = "";
-    townT.options[13].text = "";
-    townT.options[14].text = "";
-    townT.options[15].text = "";
-    townT.options[16].text = "";
-    townT.options[17].text = "";
-    townT.options[18].text = "";
-
-    townT.options[2].value = "-1";
-    townT.options[3].value = "-1";
-    townT.options[4].value = "-1";
-    townT.options[5].value = "-1";
-    townT.options[6].value = "-1";
-    townT.options[7].value = "-1";
-    townT.options[8].value = "-1";
-    townT.options[9].value = "-1";
-    townT.options[10].value = "-1";
-    townT.options[11].value = "-1";
-    townT.options[12].value = "-1";
-    townT.options[13].value = "-1";
-    townT.options[14].value = "-1";
-    townT.options[15].value = "-1";
-    townT.options[16].value = "-1";
-    townT.options[17].value = "-1";
-    townT.options[18].value = "-1";
+      const opt18 = document.createElement("option");
+      opt18.value = "17";
+      opt18.textContent = "Aradac";
+      towns.appendChild(opt18);
+      break;
   }
 }

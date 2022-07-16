@@ -46,7 +46,7 @@ footer {
 
 .nav_links li {
 	display: inline-block;
-	padding: 0px 20px;
+	padding: 0 20px;
 }
 
 .nav_links li a:hover {
@@ -114,9 +114,6 @@ form {
 	grid-gap: 20px;
 }
 
-form label {
-	display: block;
-}
 
 form p {
 	margin: 0;
@@ -205,4 +202,14 @@ form select option{
 #otherText{
 	display: none;
 	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#opt1, #opt2, #opt3 {
+	width: auto;
 }
